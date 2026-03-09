@@ -33,7 +33,7 @@ public class MemberService : IMemberService
         return (await connection.QueryAsync<Member>("SELECT * FROM Members")).ToList();
     }
 
-    public async Task<Member> GetMemberByIdAsync(int id)
+    public async Task<Member?> GetMemberByIdAsync(int id)
     {
         using var connection = context.GetConnection();
 

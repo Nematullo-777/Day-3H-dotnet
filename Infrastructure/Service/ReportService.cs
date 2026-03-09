@@ -26,8 +26,8 @@ public class ReportService : IReportService
         GROUP BY b.Title
         ORDER BY BorrowCount DESC
         LIMIT 1";
-
-        return await connection.QuerySingleOrDefaultAsync(sql);
+        List<object> result = (await connection.QueryAsync(sql)).ToList();
+        return Task.FromResult(result.FirstOrDefault());
     }
 
     public async Task<object> GetMostActiveMemberAsync()
@@ -41,8 +41,8 @@ public class ReportService : IReportService
         GROUP BY m.FullName
         ORDER BY Total DESC
         LIMIT 1";
-
-        return await connection.QuerySingleOrDefaultAsync(sql);
+        List<object> result = (await connection.QueryAsync(sql)).ToList();
+        return Task.FromResult(result.FirstOrDefault());
     }
 
     public async Task<int> GetTotalBorrowedBooksAsync()
@@ -119,8 +119,8 @@ public class ReportService : IReportService
         GROUP BY b.Genre
         ORDER BY Total DESC
         LIMIT 1";
-
-        return await connection.QuerySingleOrDefaultAsync(sql);
+        List<object> result = (await connection.QueryAsync(sql)).ToList();
+        return Task.FromResult(result.FirstOrDefault());
     }
 
     public async Task<object> GetFirstMemberWithOverdueAsync()
@@ -133,8 +133,8 @@ public class ReportService : IReportService
         JOIN Members m ON br.MemberId = m.MemberId
         WHERE br.ReturnDate > br.DueDate
         LIMIT 1";
-
-        return await connection.QueryFirstOrDefaultAsync(sql);
+        List<object> result = (await connection.QueryAsync(sql)).ToList();
+        return Task.FromResult(result.FirstOrDefault());
     }
 
     public async Task<List<object>> GetTop5MembersAsync()
@@ -176,7 +176,8 @@ public class ReportService : IReportService
 
         var sql = @"SELECT SUM(Fine) as TotalFine FROM Borrowings";
 
-        return await connection.QuerySingleOrDefaultAsync(sql);
+        List<object> result = (await connection.QueryAsync(sql)).ToList();
+        return Task.FromResult(result.FirstOrDefault());
     }
 
     public async Task<int> GetOverdueReturnedBooksCountAsync()

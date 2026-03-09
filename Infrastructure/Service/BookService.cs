@@ -34,7 +34,7 @@ public class BookService : IBookService
         return (await connection.QueryAsync<Book>("SELECT * FROM Books")).ToList();
     }
 
-    public async Task<Book> GetBookByIdAsync(int id)
+    public async Task<Book?> GetBookByIdAsync(int id)
     {
         using var connection = context.GetConnection();
 
@@ -47,13 +47,13 @@ public class BookService : IBookService
     {
         using var connection = context.GetConnection();
 
-        string sql = @"UPDATE Books
-        SET Title=@Title,
-            Genre=@Genre,
-            PublicationYear=@PublicationYear,
-            TotalCopies=@TotalCopies,
-            AvailableCopies=@AvailableCopies
-        WHERE BookId=@BookId";
+        string sql = @"UPDATE Books b
+SET AvailableCopies = TotalCopies - (
+    SELECT COUNT(*)
+    FROM Borrowings br
+    WHERE br.BookId = b.BookId
+    AND br.ReturnDate IS NULL
+);";
 
         connection.Execute(sql, book);
     }

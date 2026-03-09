@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Connections;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddConnections();
+
+builder.Services.AddScoped<DataContext>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

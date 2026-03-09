@@ -8,70 +8,70 @@ namespace WebApiProject.Controllers;
 [Route("api/[controller]")]
 public class ReportsController : ControllerBase
 {
-    private IReportService reportService;
+    private IReportService _reportService;
 
     public ReportsController(IReportService reportService)
     {
-        reportService = reportService;
+        _reportService = reportService;
     }
 
     [HttpGet("popular-book")]
     public async Task<IActionResult> GetMostPopularBook()
-        => Ok(await reportService.GetMostPopularBookAsync());
+        => Ok(await _reportService.GetMostPopularBookAsync());
 
     [HttpGet("active-member")]
     public async Task<IActionResult> GetMostActiveMember()
-        => Ok(await reportService.GetMostActiveMemberAsync());
+        => Ok(await _reportService.GetMostActiveMemberAsync());
 
     [HttpGet("total-borrowings")]
     public async Task<IActionResult> GetTotalBorrowings()
-        => Ok(await reportService.GetTotalBorrowedBooksAsync());
+        => Ok(await _reportService.GetTotalBorrowedBooksAsync());
 
     [HttpGet("average-fine")]
     public async Task<IActionResult> GetAverageFine()
-        => Ok(await reportService.GetAverageFineAsync());
+        => Ok(await _reportService.GetAverageFineAsync());
 
     [HttpGet("not-returned")]
     public async Task<IActionResult> GetBooksNotReturned()
-        => Ok(await reportService.GetBooksNotReturnedAsync());
+        => Ok(await _reportService.GetBooksNotReturnedAsync());
 
     [HttpGet("no-copies")]
     public async Task<IActionResult> GetBooksWithoutCopies()
-        => Ok(await reportService.GetBooksWithoutAvailableCopiesAsync());
+        => Ok(await _reportService.GetBooksWithoutAvailableCopiesAsync());
 
     [HttpGet("never-borrowed")]
     public async Task<IActionResult> GetBooksNeverBorrowed()
-        => Ok(await reportService.GetBooksNeverBorrowedAsync());
+        => Ok(await _reportService.GetBooksNeverBorrowedAsync());
 
     [HttpGet("members-with-borrowings")]
     public async Task<IActionResult> GetMembersWithBorrowings()
-        => Ok(await reportService.GetMembersWithBorrowingsAsync());
+        => Ok(await _reportService.GetMembersWithBorrowingsAsync());
 
     [HttpGet("popular-genre")]
     public async Task<IActionResult> GetPopularGenre()
-        => Ok(await reportService.GetMostPopularGenreAsync());
+        => Ok(await _reportService.GetMostPopularGenreAsync());
 
     [HttpGet("first-overdue-member")]
     public async Task<IActionResult> GetFirstOverdueMember()
-        => Ok(await reportService.GetFirstMemberWithOverdueAsync());
+        => Ok(await _reportService.GetFirstMemberWithOverdueAsync());
 
     [HttpGet("top5-members")]
     public async Task<IActionResult> GetTopMembers()
-        => Ok(await reportService.GetTop5MembersAsync());
+        => Ok(await _reportService.GetTop5MembersAsync());
 
     [HttpGet("books-over-5")]
     public async Task<IActionResult> GetBooksBorrowedMoreThan5Times()
-        => Ok(await reportService.GetBooksBorrowedMoreThan5TimesAsync());
+        => Ok(await _reportService.GetBooksBorrowedMoreThan5TimesAsync());
 
     [HttpGet("total-fines")]
     public async Task<IActionResult> GetTotalFines()
-        => Ok(await reportService.GetTotalFinesAsync());
+        => Ok(await _reportService.GetTotalFinesAsync());
 
     [HttpGet("overdue-count")]
     public async Task<IActionResult> GetOverdueCount()
-        => Ok(await reportService.GetOverdueReturnedBooksCountAsync());
+        => Ok(await _reportService.GetOverdueReturnedBooksCountAsync());
 
     [HttpGet("members-paid-fine")]
     public async Task<IActionResult> GetMembersPaidFine()
-        => Ok(await reportService.GetMembersWhoPaidFineAsync());
+        => Ok(await _reportService.GetMembersWhoPaidFineAsync());
 }
