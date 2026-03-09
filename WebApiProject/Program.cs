@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Connections;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddConnections();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-IServiceCollection serviceCollection = builder.Services.AddSingleton<IConnectionFactory, DataContext>();
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IMemberService, MemberService>();
